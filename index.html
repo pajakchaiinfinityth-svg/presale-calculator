@@ -345,6 +345,122 @@
         </div>
       </div>
     </section>
+
+    <section class="bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-6">
+      <div>
+        <h3 class="text-2xl font-semibold text-slate-800">Mobility OS Pilot Script (Production ROI Story)</h3>
+        <p class="text-slate-600 mt-2">
+          สคริปต์นำเสนอที่เชื่อม Assistants API กับผลลัพธ์เชิงธุรกิจแบบวัดผลได้ สำหรับสนามบินและภาคบริการ.
+        </p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6 text-sm text-slate-600">
+        <div class="p-4 rounded-xl bg-slate-50 space-y-2">
+          <p class="font-semibold text-slate-800">Narrative (EN)</p>
+          <p>Today I’ll show a production-style Mobility OS pilot that turns Assistants API into measurable ROI...</p>
+          <p>Under the hood, we use Assistants API with Function Calling and a Vector Store...</p>
+          <p>Tier-3 results: p95 wait dropped 25→8 minutes, cancellations down 40 percent, paid-minutes/hr up 30 percent.</p>
+          <p>Production hardening includes rate-limit handling, retries/backoff, idempotency, observability, and safety guardrails.</p>
+          <p>Business view: auto-resolved cases 36,600, minutes saved 219,600, tokens 114.8M, API cost ~US$57K, net impact ~US$34K.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 space-y-2">
+          <p class="font-semibold text-slate-800">Thai On-Screen Subtitles (ย่อ)</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Assistants API + Function Calling + Vector Store (RAG) จัดคิวสนามบินแบบเรียลไทม์</li>
+            <li>KPI: p95 wait 25→8 นาที, cancellations −40%, paid-minutes/hr +30%</li>
+            <li>Production hardening: rate-limit, retries/backoff, idempotency, observability</li>
+            <li>Safety & PDPA: redaction, policy guardrails, HITL</li>
+            <li>ผลรวมเดือน: auto-resolved 36,600, saved 219,600 นาที, tokens 114.8M, API cost ~US$57K, Net +US$34K</li>
+          </ul>
+        </div>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-50">
+        <p class="font-semibold text-slate-800">SSML – drop-in for TTS</p>
+        <pre class="mt-2 text-xs text-slate-600 whitespace-pre-wrap">
+&lt;speak&gt;
+  &lt;prosody rate="90%"&gt;
+    &lt;p&gt;Today I’ll show a production style Mobility O S pilot that turns Assistants A P I into measurable R O I...&lt;/p&gt;
+    &lt;p&gt;Under the hood, we use Assistants A P I with Function Calling and a Vector Store...&lt;/p&gt;
+    &lt;p&gt;In the last thirty days, Tier three results: P ninety five wait dropped from 25 to 8 minutes...&lt;/p&gt;
+    &lt;p&gt;We harden for production with rate limit handling, retries with backoff, idempotency...&lt;/p&gt;
+    &lt;p&gt;Here is the business view: monthly auto resolved cases 36,600, minutes saved 219,600...&lt;/p&gt;
+  &lt;/prosody&gt;
+&lt;/speak&gt;
+        </pre>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
+      <h3 class="text-2xl font-semibold text-slate-800">One-Pager Architecture — QueueZero Mobility OS</h3>
+      <p class="text-slate-600 mt-2">
+        โครงสร้างระบบตัวอย่างสำหรับสนามบินที่เชื่อม Assistants API กับข้อมูลเที่ยวบิน, curb sensors, และการจัดคิวแบบเรียลไทม์.
+      </p>
+      <div class="grid lg:grid-cols-2 gap-6 mt-4 text-sm text-slate-600">
+        <div class="p-4 rounded-xl bg-slate-50 space-y-2">
+          <p class="font-semibold text-slate-800">System Map</p>
+          <p>Channels (LINE OA / Web / IVR) → Gateway/API → Assistants API</p>
+          <p>Tools: search_kb, assign_staging_lane, get_flight_bank, notify, schedule_callback</p>
+          <p>Workers/Queues + HITL Console → External Systems (Flights API, Curb Sensors, Driver App)</p>
+          <p>Observability: latency_p50/p95, groundedness, deflection, tokens, cost/run</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 space-y-2">
+          <p class="font-semibold text-slate-800">Safety & Governance</p>
+          <p>PDPA data map, PII redaction, consent flags, least-privilege roles, HITL for high-risk actions.</p>
+          <p>Production hardening: rate-limit, retries/backoff, idempotency, circuit-breaker, DLQ + replay.</p>
+          <p>Evals: groundedness ≥ 0.90, refusal safety ≥ 0.98, KPI suites per domain.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow-lg p-6 border border-slate-200 space-y-6">
+      <div>
+        <h3 class="text-2xl font-semibold text-slate-800">Cross-Industry Blueprint Pack (API-first)</h3>
+        <p class="text-slate-600 mt-2">
+          Blueprint แบบยกไปใช้ได้ทันที ครอบคลุม 10 อุตสาหกรรม พร้อม production hardening, safety, evals และ impact.
+        </p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6 text-sm text-slate-600">
+        <div class="p-4 rounded-xl bg-slate-50 space-y-2">
+          <p class="font-semibold text-slate-800">Core Primitives (ใช้ซ้ำ)</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Tools: search_kb, get_entity, create_case, schedule_callback, notify, redact</li>
+            <li>Hardening: retries/backoff, circuit-breaker, idempotency, queue, observability</li>
+            <li>Governance: PDPA data map, consent, least-privilege, HITL</li>
+            <li>Evals: groundedness, latency p95, deflection→FCR, AHT, CSAT</li>
+          </ul>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 space-y-2">
+          <p class="font-semibold text-slate-800">Universal SLO & Evals</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Latency p95: chat &lt;2.5s, actions &lt;5s</li>
+            <li>Groundedness ≥ 0.85 / 0.88 / 0.90</li>
+            <li>Safety (refusal appropriateness) ≥ 0.95 / 0.97 / 0.98</li>
+            <li>Uptime: 99.5% / 99.9% / 99.95% (รวม fallback)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6 text-sm text-slate-600">
+        <div class="p-4 rounded-xl bg-slate-50 space-y-2">
+          <p class="font-semibold text-slate-800">Blueprint Highlights</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Airports & Mobility: Curbside Orchestrator (p95 wait 25→8)</li>
+            <li>Retail & E-commerce: Order Care Copilot (FCR 60→80%)</li>
+            <li>Banking/Fintech: Secure Servicing Assistant (HITL required)</li>
+            <li>Telco/ISP: Outage Shield (deflection 35→60%)</li>
+            <li>Healthcare: Triage & Admin Concierge (no diagnosis)</li>
+          </ul>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 space-y-2">
+          <p class="font-semibold text-slate-800">Additional Industries</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Education: Teacher Copilot & Family Brief</li>
+            <li>SME Back-Office: CFO Morning Digest + Order→Invoice Orchestrator</li>
+            <li>Manufacturing: Supplier Q&A + Shortage Mitigator</li>
+            <li>Hospitality/Travel: Concierge & Recovery</li>
+            <li>Real Estate/Facilities: Work-Order Assistant</li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="text-center text-sm text-slate-500 py-6">
