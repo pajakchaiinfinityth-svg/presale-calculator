@@ -308,6 +308,43 @@
         </div>
       </div>
     </section>
+
+    <section class="bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
+      <h3 class="text-2xl font-semibold text-slate-800">Merge Conflict Resolution Playbook</h3>
+      <p class="text-slate-600 mt-2">
+        แนวทางปฏิบัติเมื่อเกิดความขัดแย้งในการผสานโค้ด เพื่อให้ทีมตัดสินใจและส่งมอบได้อย่างรวดเร็ว.
+      </p>
+      <div class="grid lg:grid-cols-2 gap-6 mt-4 text-sm text-slate-600">
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-slate-50">
+            <p class="font-semibold text-slate-800">1. ตรวจสอบสถานะ</p>
+            <p>รัน <span class="font-mono">git status</span> เพื่อดูไฟล์ที่ conflict และสาขาปัจจุบัน.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50">
+            <p class="font-semibold text-slate-800">2. เปิดไฟล์ที่ชนกัน</p>
+            <p>ค้นหา marker <span class="font-mono">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span>, <span class="font-mono">=======</span>, <span class="font-mono">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> เพื่อดูส่วนที่ต้องเลือก.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50">
+            <p class="font-semibold text-slate-800">3. ตัดสินใจเวอร์ชันสุดท้าย</p>
+            <p>เลือกเก็บการเปลี่ยนแปลงฝั่งใดฝั่งหนึ่ง หรือผสานทั้งสองให้สอดคล้องกัน.</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-slate-50">
+            <p class="font-semibold text-slate-800">4. บันทึกการแก้ไข</p>
+            <p>ลบ marker ทั้งหมด แล้วจัดรูปแบบเนื้อหาให้ถูกต้อง.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50">
+            <p class="font-semibold text-slate-800">5. เตรียม commit</p>
+            <p>รัน <span class="font-mono">git add .</span> เพื่อ mark ว่าแก้ไขเรียบร้อย.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50">
+            <p class="font-semibold text-slate-800">6. บันทึกผลลัพธ์</p>
+            <p>สร้าง commit ใหม่ด้วยข้อความเช่น <span class="font-mono">"Resolve merge conflict"</span>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="text-center text-sm text-slate-500 py-6">
