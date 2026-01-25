@@ -164,6 +164,107 @@
     </section>
 
     <section class="bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <h3 class="text-2xl font-semibold text-slate-800">Pricing & Revenue Calculator</h3>
+          <p class="text-slate-600 mt-2">
+            โมดูลคำนวณต้นทุนและรายได้แบบย่อ เพื่อรองรับการออกแบบแพ็กเกจบริการและการตั้งราคาเบื้องต้น.
+          </p>
+        </div>
+        <div class="text-sm text-slate-500 bg-slate-50 px-4 py-2 rounded-full">
+          สูตรคำนวณสามารถปรับให้สอดคล้องกับโมเดลรายได้ของ SYNCERA
+        </div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6 mt-6">
+        <div class="space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-600">C_push (฿/push)</label>
+              <input id="calc-cpush" type="number" step="0.0001" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="0.0008"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">C_event (฿/event)</label>
+              <input id="calc-cevent" type="number" step="0.001" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="0.004"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">C_gps (฿/sample)</label>
+              <input id="calc-cgps" type="number" step="0.00001" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="0.00006"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">C_presence (฿/heartbeat)</label>
+              <input id="calc-cpresence" type="number" step="0.0001" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="0.0005"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">C_mb (฿/MB)</label>
+              <input id="calc-cmb" type="number" step="0.01" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="0.40"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">Fixed Per Trip (฿)</label>
+              <input id="calc-fixed" type="number" step="0.1" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="0.80"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">D_online (drivers)</label>
+              <input id="calc-donline" type="number" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="8"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">Margin (%)</label>
+              <input id="calc-margin" type="number" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="40"/>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-600">Data Events (events/trip)</label>
+              <input id="calc-devents" type="number" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="20"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">GPS Samples (samples/trip)</label>
+              <input id="calc-gpsamples" type="number" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="180"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">Presence (heartbeats/trip)</label>
+              <input id="calc-presence" type="number" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="8"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">Storage (MB/trip)</label>
+              <input id="calc-storage" type="number" step="0.1" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="0.6"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600">Trip Duration (min)</label>
+              <input id="calc-duration" type="number" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2" value="10"/>
+            </div>
+          </div>
+          <button id="calc-run" class="w-full rounded-lg bg-emerald-600 text-white py-2 font-semibold hover:bg-emerald-700">
+            คำนวณราคา
+          </button>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+          <h4 class="text-lg font-semibold text-slate-800">ผลลัพธ์การคำนวณ</h4>
+          <div class="mt-4 space-y-3 text-slate-600">
+            <div class="flex items-center justify-between">
+              <span>Total Cost / Trip</span>
+              <span id="calc-out-cost" class="font-semibold text-slate-800">–</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>Sell Trip (with margin)</span>
+              <span id="calc-out-sell" class="font-semibold text-slate-800">–</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>Revenue / Minute</span>
+              <span id="calc-out-rev-min" class="font-semibold text-slate-800">–</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>Revenue / Second</span>
+              <span id="calc-out-rev-sec" class="font-semibold text-slate-800">–</span>
+            </div>
+          </div>
+          <div class="mt-6 text-xs text-slate-500">
+            หมายเหตุ: สูตรนี้สามารถต่อยอดเพื่อรองรับ subscription, SLA tiers, หรือ multi-region cost ได้
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
       <h3 class="text-2xl font-semibold text-slate-800">Delivery Roadmap (3 Horizons)</h3>
       <div class="grid md:grid-cols-3 gap-4 mt-4 text-sm text-slate-600">
         <div class="p-4 rounded-xl bg-slate-50">
@@ -212,5 +313,41 @@
   <footer class="text-center text-sm text-slate-500 py-6">
     © 2024 SYNCERA PJ VALLEY — Unified Multi-Agent Development System
   </footer>
+  <script>
+    const calculatePricing = () => {
+      const C_push = Number(document.getElementById('calc-cpush').value);
+      const C_event = Number(document.getElementById('calc-cevent').value);
+      const C_gps = Number(document.getElementById('calc-cgps').value);
+      const C_presence = Number(document.getElementById('calc-cpresence').value);
+      const C_mb = Number(document.getElementById('calc-cmb').value);
+      const FixedPerTrip = Number(document.getElementById('calc-fixed').value);
+      const D_online = Number(document.getElementById('calc-donline').value);
+      const DataEvents = Number(document.getElementById('calc-devents').value);
+      const GPSsamples = Number(document.getElementById('calc-gpsamples').value);
+      const Presence = Number(document.getElementById('calc-presence').value);
+      const StorageMB = Number(document.getElementById('calc-storage').value);
+      const margin = Number(document.getElementById('calc-margin').value) / 100;
+      const tripDuration = Number(document.getElementById('calc-duration').value);
+
+      const totalCostPerTrip = (D_online * C_push)
+        + (DataEvents * C_event)
+        + (GPSsamples * C_gps)
+        + (Presence * C_presence)
+        + (StorageMB * C_mb)
+        + FixedPerTrip
+        + (1 * C_push);
+
+      const sellTrip = totalCostPerTrip / (1 - margin);
+      const revenuePerMinute = sellTrip / tripDuration;
+      const revenuePerSecond = sellTrip / (tripDuration * 60);
+
+      document.getElementById('calc-out-cost').innerText = `${totalCostPerTrip.toFixed(3)} ฿`;
+      document.getElementById('calc-out-sell').innerText = `${sellTrip.toFixed(3)} ฿`;
+      document.getElementById('calc-out-rev-min').innerText = `${revenuePerMinute.toFixed(3)} ฿/min`;
+      document.getElementById('calc-out-rev-sec').innerText = `${revenuePerSecond.toFixed(5)} ฿/sec`;
+    };
+
+    document.getElementById('calc-run').addEventListener('click', calculatePricing);
+  </script>
 </body>
 </html>
