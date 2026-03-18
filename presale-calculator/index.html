@@ -164,6 +164,27 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Cache input element references once to avoid repeated DOM lookups
+      const inpCpush     = document.getElementById('inp-cpush');
+      const inpCevent    = document.getElementById('inp-cevent');
+      const inpCgps      = document.getElementById('inp-cgps');
+      const inpCpresence = document.getElementById('inp-cpresence');
+      const inpCmb       = document.getElementById('inp-cmb');
+      const inpFixed     = document.getElementById('inp-fixed');
+      const inpDonline   = document.getElementById('inp-donline');
+      const inpDevents   = document.getElementById('inp-devents');
+      const inpGpsamples = document.getElementById('inp-gpsamples');
+      const inpPresence  = document.getElementById('inp-presence');
+      const inpStorage   = document.getElementById('inp-storage');
+      const inpMargin    = document.getElementById('inp-margin');
+      const inpDuration  = document.getElementById('inp-duration');
+
+      // Cache output element references once
+      const outCost     = document.getElementById('out-cost');
+      const outSellTrip = document.getElementById('out-sellTrip');
+      const outRevMin   = document.getElementById('out-revMin');
+      const outRevSec   = document.getElementById('out-revSec');
+
       const ctx = document.getElementById('revenueChart').getContext('2d');
       const revenueChart = new Chart(ctx, {
         type: 'bar',
@@ -183,21 +204,20 @@
         }
       });
 
-      document.getElementById('btn-calc').addEventListener('click', () => {
-        // read inputs
-        const C_push       = +document.getElementById('inp-cpush').value;
-        const C_event      = +document.getElementById('inp-cevent').value;
-        const C_gps        = +document.getElementById('inp-cgps').value;
-        const C_presence   = +document.getElementById('inp-cpresence').value;
-        const C_mb         = +document.getElementById('inp-cmb').value;
-        const FixedPerTrip = +document.getElementById('inp-fixed').value;
-        const D_online     = +document.getElementById('inp-donline').value;
-        const DataEvents   = +document.getElementById('inp-devents').value;
-        const GPSsamples   = +document.getElementById('inp-gpsamples').value;
-        const Presence     = +document.getElementById('inp-presence').value;
-        const StorageMB    = +document.getElementById('inp-storage').value;
-        const margin       = +document.getElementById('inp-margin').value / 100;
-        const tripDuration = +document.getElementById('inp-duration').value;
+      function calculate() {
+        const C_push       = +inpCpush.value;
+        const C_event      = +inpCevent.value;
+        const C_gps        = +inpCgps.value;
+        const C_presence   = +inpCpresence.value;
+        const C_mb         = +inpCmb.value;
+        const FixedPerTrip = +inpFixed.value;
+        const D_online     = +inpDonline.value;
+        const DataEvents   = +inpDevents.value;
+        const GPSsamples   = +inpGpsamples.value;
+        const Presence     = +inpPresence.value;
+        const StorageMB    = +inpStorage.value;
+        const margin       = +inpMargin.value / 100;
+        const tripDuration = +inpDuration.value;
 
         // cost formula
         const TotalCostPerTrip =
@@ -207,22 +227,42 @@
           (Presence * C_presence) +
           (StorageMB * C_mb) +
           FixedPerTrip +
-          (1 * C_push); // rider push
+          C_push; // rider push
 
         const SellTrip = TotalCostPerTrip / (1 - margin);
         const RevMin   = SellTrip / tripDuration;
-        const RevSec   = SellTrip / (tripDuration * 60);
+        const RevSec   = RevMin / 60; // derived from RevMin, avoids redundant division
 
-        // update UI
-        document.getElementById('out-cost').innerText     = TotalCostPerTrip.toFixed(3);
-        document.getElementById('out-sellTrip').innerText = SellTrip.toFixed(3);
-        document.getElementById('out-revMin').innerText   = RevMin.toFixed(3);
-        document.getElementById('out-revSec').innerText   = RevSec.toFixed(5);
+        // update UI (textContent is faster than innerText – no layout reflow)
+        outCost.textContent     = TotalCostPerTrip.toFixed(3);
+        outSellTrip.textContent = SellTrip.toFixed(3);
+        outRevMin.textContent   = RevMin.toFixed(3);
+        outRevSec.textContent   = RevSec.toFixed(5);
 
         // update chart
         revenueChart.data.datasets[0].data = [SellTrip];
         revenueChart.update();
-      });
+      }
+
+      // Debounce helper – limits recalculations while the user is still typing
+      function debounce(fn, delay) {
+        let timer;
+        return function () {
+          clearTimeout(timer);
+          timer = setTimeout(fn, delay);
+        };
+      }
+
+      const debouncedCalc = debounce(calculate, 300);
+
+      // Live recalculation on any input change inside the calculator section
+      document.getElementById('presale-calculator').addEventListener('input', debouncedCalc);
+
+      // Button still triggers an immediate (non-debounced) calculation
+      document.getElementById('btn-calc').addEventListener('click', calculate);
+
+      // Show initial results on page load
+      calculate();
     });
   </script>
 
